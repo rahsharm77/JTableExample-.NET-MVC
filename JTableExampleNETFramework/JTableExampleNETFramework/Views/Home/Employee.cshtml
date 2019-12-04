@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "JTable Example";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-
+requests">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- STYLES -->
+    <link href="~/Scripts/jtable/Content/themes/metroblue/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Scripts/jtable/Scripts/jtable/themes/metro/blue/jtable.css" rel="stylesheet" type="text/css" />
+
+
+    <!-- SCRIPTS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jtable/Scripts/jtable/jquery.jtable.js"></script>
+
+</head>
+<body>
+
+    <div id="EmployeeTableContainer"></div>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            alert("Starting to load the JTable Grid");
+            $('#EmployeeTableContainer').jtable({
+                title: 'Employees List',
+                actions: {
+                    listAction: '/Home/GetEmployeeData',
+                    deleteAction: '/Home/DeleteEmployeeData',
+                    updateAction: '/Home/UpdateEmployeeData',
+                    createAction: '/Home/InsertEmployeeData'
+                },
+                fields: {
+                    EmployeeId: {
+                        key: true,
+                        create: false,
+                        edit: false,
+                        list: true,
+                        title: 'Employee ID',
+                    },
+                    Name : {
+                        title: 'Employee Name'
+                    },
+                    City : {
+                        title: 'City'
+                    },
+                    Department : {
+                        title: 'Department'
+                    },
+                    Gender : {
+                        title: 'Gender'
+                    },
+                    BulkUpdate : {
+                        title: 'Is Bulk Update',
+                        list: false,
+                    },
+                }
+            });
+            //Load student list from server
+            $('#EmployeeTableContainer').jtable('load');
+        });
+    </script>
+</body>
+</html>
